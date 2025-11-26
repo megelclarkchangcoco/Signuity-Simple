@@ -11,9 +11,9 @@ body {
     background-color: #0a0a0a; 
     color: #ffffff; 
     min-height: 100vh;
-    
 }
 
+/* Optional full-page background wrapper (not used right now) */
 .background { 
     position: fixed; 
     top: 0; 
@@ -24,6 +24,9 @@ body {
     overflow: hidden; 
 }  
 
+/* ========================= */
+/* HERO WAVY BACKGROUND      */
+/* ========================= */
 
 .background-lines { 
     position: absolute;
@@ -31,13 +34,15 @@ body {
     background-image: url("../../images/Background Line2.png"); 
     background-repeat: no-repeat; 
     background-size: cover; 
-    background-position: center 1%; 
-    transform: translateY(300px);      
+    background-position: center 100%; 
+    transform: translateY(220px);   /* adjust waves downward */
     pointer-events: none; 
     z-index: 0; 
 }
 
-
+/* ========================= */
+/* NAVIGATION                */
+/* ========================= */
 
 nav { 
     position: fixed; 
@@ -168,6 +173,7 @@ nav {
     gap: 18px; 
     justify-content: center; 
     align-items: center; 
+    flex-wrap: wrap;
 } 
 
 .btn { 
@@ -204,7 +210,9 @@ nav {
     box-shadow: 0 10px 30px rgba(61, 217, 197, 0.3); 
 }
 
+/* ========================= */
 /* INSTRUCTIONS SECTION      */
+/* ========================= */
 
 .instructions {
     position: relative;
@@ -416,28 +424,6 @@ nav {
     font-weight: 500;
 }
 
-/* ========================= */
-/* RESPONSIVE                */
-/* ========================= */
-
-@media (max-width: 968px) {
-    .step-card {
-        grid-template-columns: 1fr;
-        padding: 30px;
-        gap: 30px;
-    }
-    
-    .instructions {
-        padding: 60px 30px;
-    }
-    
-    .instructions-title {
-        font-size: 36px;
-    }
-}
-
-
-
 /* ============================= */
 /*        Sign In Page           */
 /* ============================= */
@@ -445,12 +431,11 @@ nav {
 .signin-body {
     background-color: #0a0a0a;
     color: #ffffff;
-    display: flex;          /* ❗ keeps sign-in layout centered */
+    display: flex;          
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
-
 
 .logo-two {
     position: absolute;
@@ -494,7 +479,6 @@ nav {
 
 .google-btn:hover{
     background-color: #f0f0f0;
-
 }
 
 .google-icon {
@@ -529,7 +513,8 @@ nav {
 .email-section {
     margin-top: 30px;
 }
- /* form */
+
+/* form inside signin */
 form { 
     width: 100%; 
 }
@@ -585,7 +570,6 @@ form {
 /*          OTP  Page            */
 /* ============================= */
 
-
 .otp-body {
     background-color: #0a0a0a;
     color: #ffffff;
@@ -632,6 +616,7 @@ form {
     justify-content: center;
     gap: 12px;
     margin-bottom: 30px;
+    flex-wrap: nowrap;
 }
 
 .otp-input {
@@ -692,41 +677,187 @@ form {
     color: #3dd9c5;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* ========================= */
+/* RESPONSIVE – HERO & NAV   */
+/* ========================= */
+
+@media (max-width: 992px) {
+    nav {
+        padding: 18px 24px;
+    }
+
+    .nav-links {
+        gap: 24px;
+    }
+
+    .hero {
+        padding: 130px 16px 80px;
+    }
+
     .hero-title {
-        font-size: 60px;
+        font-size: clamp(52px, 10vw, 110px);
         letter-spacing: 4px;
     }
 
     .hero-subtitle {
-        font-size: 15px;
+        font-size: 18px;
+        margin-bottom: 30px;
     }
 
-    nav {
-        padding: 20px 30px;
+    .background-lines {
+        transform: translateY(180px);
     }
 
-    .nav-links {
-         gap: 20px;
-    }
-
-    .cta-buttons {
-        flex-wrap: wrap;
-    }
-
-    .btn {
-        padding: 14px 30px;
-        font-size: 14px;
+    .step-card {
+        padding: 40px;
+        gap: 32px;
     }
 }
 
-@media (max-width:480px){
-      .container { 
-        padding: 20px; 
-        max-width: 360px; 
+@media (max-width: 768px) {
+    nav {
+        padding: 14px 18px;
     }
-      .container h1 { 
-        font-size: 26px; 
+
+    .logo {
+        width: 80px;
+        height: 40px;
+    }
+
+    .nav-links {
+        gap: 16px;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 120px 16px 70px;
+    }
+
+    .hero-title {
+        font-size: 42px;
+        letter-spacing: 3px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 10px 24px;
+        min-width: 120px;
+        font-size: 13px;
+    }
+
+    .instructions {
+        padding: 70px 20px;
+    }
+
+    .instructions-title {
+        font-size: 32px;
+    }
+
+    .instructions-subtitle {
+        font-size: 16px;
+        margin-bottom: 40px;
+    }
+
+    .step-card {
+        grid-template-columns: 1fr;
+        padding: 28px 20px;
+        gap: 22px;
+    }
+
+    .step-heading {
+        font-size: 20px;
+    }
+
+    .step-description {
+        font-size: 14px;
+    }
+
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .background-lines {
+        transform: translateY(160px);
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        padding: 12px 14px;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+    .hero {
+        padding: 110px 12px 60px;
+    }
+
+    .hero-title {
+        font-size: 34px;
+        letter-spacing: 2px;
+    }
+
+    .hero-subtitle {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .cta-buttons {
+        gap: 10px;
+    }
+
+    .btn {
+        min-width: 110px;
+        padding: 9px 20px;
+        font-size: 12px;
+    }
+
+    .instructions {
+        padding: 60px 16px;
+    }
+
+    .step-card {
+        padding: 22px 16px;
+    }
+
+    /* signin/otp containers narrower on small phones */
+    .container,
+    .container-otp {
+        max-width: 360px;
+        padding: 16px;
+    }
+
+    .signin-title {
+        font-size: 26px;
+        margin-bottom: 28px;
+    }
+
+    .otp-inputs {
+        gap: 8px;
+    }
+
+    .otp-input {
+        width: 42px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .logo-two {
+        top: 20px;
+        left: 20px;
+        width: 42px;
+        height: 42px;
     }
 }
