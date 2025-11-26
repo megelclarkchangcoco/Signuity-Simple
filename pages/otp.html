@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <title>Email Verification - Signuity</title>
+
+</head>
+<body class="otp-body">
+
+   <div class="logo-container">
+        <div class="logo-two">
+            <img src="../images/logo_2.png" alt="Signuity Logo" style="width:50%; height:50%; object-fit:contain;">
+        </div>
+    </div>
+
+    <div class="container-otp">
+
+        <svg class="email-icon" viewBox="0 0 60 60">
+            <rect x="8" y="18" width="44" height="30" rx="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 8 22 L 30 35 L 52 22" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <h1 class="otp-title">We've sent a 6-digit code</h1>
+        <p class="email-text">to your email: <span>joh***@gmail.com</span></p>
+
+        <form id="otp-form" action="" method="">
+
+            <!-- Hidden email for backend -->
+            <input type="hidden" name="email" value="joh***@gmail.com">
+
+            <!-- Hidden OTP where JS will combine 6 digits -->
+            <input type="hidden" name="otp" id="otp-value">
+
+            <div class="otp-inputs">
+                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required>
+                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required>
+                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required>
+                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required>
+                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required>
+                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required>
+            </div>
+
+            <p id="error" class="error" style="display:none;">Invalid code. Please enter all 6 digits.</p>
+
+            <button type="submit" class="continue-btn">Verify Code</button>
+        </form>
+
+        <p class="footer-text">
+            Didn’t receive the code? Check spam or <a href="#">contact support</a>
+        </p>
+    </div>
+
+    <script>
+        const inputs = document.querySelectorAll('.otp-input');
+        const form = document.getElementById('otp-form');
+        const otpHidden = document.getElementById('otp-value');
+        const errorText = document.getElementById('error');
+
+        // auto move next
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            // backspace moves back
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+
+        inputs[0].focus();
+
+        // Submit handler
+        form.addEventListener('submit', (e) => {
+            let code = "";
+            inputs.forEach(i => code += i.value);
+
+            if (code.length !== 6) {
+                e.preventDefault();
+                errorText.style.display = "block";
+                return;
+            }
+
+            otpHidden.value = code; // put full code in hidden field
+        });
+    </script>
+
+</body>
+</html>
